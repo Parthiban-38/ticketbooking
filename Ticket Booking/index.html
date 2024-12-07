@@ -1,0 +1,97 @@
+<html>
+<head>
+  <title>BookMyShow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <h1>BookMyShow</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Search Bar Section -->
+  <section id="search-section">
+    <input type="text" id="search-input" placeholder="Search for movies..." oninput="filterMovies()">
+  </section>
+
+  <!-- Movie List Section -->
+  <section id="movies">
+    <h2 class="center">Available Movies</h2>
+    <div class="movie-list" id="movie-list">
+      <!-- Movie cards will be dynamically inserted here -->
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2024 BookMyShow</p>
+  </footer>
+
+  <script>
+    // Dummy movie data (You can replace this with Firebase data)
+    const movies = [
+      { name: "Avengers: Endgame", genre: "Action, Adventure", imdbRating: "8.4", posterUrl: "aveng.jpg" },
+      { name: "Spider-Man: No Way Home", genre: "Action, Adventure", imdbRating: "8.3", posterUrl: "spi.jpg" },
+      { name: "Inception", genre: "Action, Sci-Fi", imdbRating: "8.8", posterUrl:"incp.jpg" },
+      { name: "The Dark Knight", genre: "Action, Crime", imdbRating: "9.0", posterUrl: "download.jpg" },
+      { name: "Interstellar", genre: "Adventure, Drama", imdbRating: "8.6", posterUrl: "inter.jpg" },
+      { name: "Shutter Island", genre: "Mystery, Thriller", imdbRating: "8.1", posterUrl: "shut.jpg" },
+      { name: "Amaran", genre: "Action,Love", imdbRating: "9.4", posterUrl:"amar.jpg" },
+      { name: "GOAT", genre: "Action,Sci-Fi", imdbRating: "9.0", posterUrl: "goat.jpg" },
+      { name: "Ghilli", genre: "Adventure,Sports", imdbRating: "8.1", posterUrl: "ghi.jpg" },
+      { name: "Veeram", genre: "Love, Thriller", imdbRating: "8.7", posterUrl: "veer.jpg" }
+    ];
+
+    // Function to display movies
+    function displayMovies(filteredMovies) {
+      const movieList = document.getElementById('movie-list');
+      movieList.innerHTML = ""; // Clear the existing movie list
+
+      filteredMovies.forEach(movie => {
+        const movieCard = document.createElement('div');
+        movieCard.classList.add('movie-card');
+        movieCard.innerHTML = `
+          <img src="${movie.posterUrl}" alt="${movie.name}">
+          <div class="movie-details">
+            <h3>${movie.name}</h3>
+            <p>Genre: ${movie.genre}</p>
+            <p>IMDB Rating: ${movie.imdbRating}</p>
+            <button onclick="bookNow('${movie.name}', 200)">Book Now</button>
+          </div>
+        `;
+        movieList.appendChild(movieCard);
+      });
+    }
+
+    // Function to filter movies based on search input
+    function filterMovies() {
+      const searchInput = document.getElementById('search-input').value.toLowerCase();
+      const filteredMovies = movies.filter(movie => {
+        return movie.name.toLowerCase().includes(searchInput);
+      });
+      displayMovies(filteredMovies);
+    }
+
+    // Function to navigate to seat selection page
+    function bookNow(movieName, ticketPrice) {
+      // Store movie details in local storage and redirect to the seat selection page
+      localStorage.setItem('movieName', movieName);
+      localStorage.setItem('ticketPrice', ticketPrice);
+      window.location.href = 'seat.html';
+    }
+
+    // Initially display all movies
+    displayMovies(movies);
+  </script>
+
+</body>
+</html>

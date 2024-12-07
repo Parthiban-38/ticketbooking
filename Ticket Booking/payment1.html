@@ -1,0 +1,90 @@
+<html>
+<head>
+  <title>Payment</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Add some basic styling */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    input, button {
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>BookMyShow</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<form id="paymentForm">
+  <div class="payment_center">
+    <h1>Payment</h1>
+    <div style="display: flex; align-items: center; font-size: 32px;">
+      <p>Movie: </p>
+      <p id="movie-name" style="padding: 8px; font-size: 32px; font-weight: bold;"></p> <!-- Movie name here -->
+    </div>
+    <div style="display: flex; align-items: center; font-size: 32px;">
+      <p>₹</p>
+      <p id="total_Amount" style="padding: 8px; font-size: 32px;"></p> <!-- Total amount here -->
+    </div>
+    <div>
+      <label for="cardNumber">Card Number:</label>
+      <input type="text" id="cardNumber" placeholder="Card Number" required>
+    </div>
+    <div style="margin-top: 20px;">
+      <label for="cvv" style="padding-right: 60px;">CVV:</label>
+      <input type="text" id="cvv" placeholder="CVV" required>
+    </div>
+    <div style="margin-top: 20px;">
+      <label for="expiryDate" style="padding-right: 10px;">Expiry Date:</label>
+      <input type="text" id="expiryDate" placeholder="MM/YY" required>
+    </div>
+    <div style="margin-top: 20px;">
+      <label for="userName" style="padding-right: 50px;">Name:</label>
+      <input type="text" id="userName" placeholder="Name" required>
+    </div>
+    <button type="submit" id="paymentButton">Pay</button>
+    <div class="alert" style="display: none;">Payment successful!</div> <!-- Success alert -->
+  </div>
+</form>
+
+        
+        <!-- Footer Section -->
+        <footer>
+            <p>&copy; 2024 BookMyShow</p>
+        </footer>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+      <script src="./payment1.js"></script>
+      <script>
+  // Retrieve the total amount from the URL query string
+  const urlParams = new URLSearchParams(window.location.search);
+  const totalAmount = urlParams.get('totalAmount');
+
+  // Retrieve movie name from localStorage
+  const movieName = localStorage.getItem('movieName');  // Retrieve the movie name
+
+  // Display the movie name and total amount on the payment page
+  if (movieName) {
+    document.getElementById('movie-name').textContent = movieName;
+  } else {
+    document.getElementById('movie-name').textContent = "Movie not found";
+  }
+
+  document.getElementById('total_Amount').textContent = totalAmount;
+</script>
+</body>
+</html>

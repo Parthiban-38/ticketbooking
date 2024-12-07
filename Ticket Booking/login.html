@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - BookMyShow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>BookMyShow</h1>
+    <header>
+      <div class="logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+      </nav>
+    </header>
+  </header>
+
+  <section id="login-form" class="payment_center">
+    <form action="get" onsubmit="login(event)" style=" display: flex; align-items: center; flex-direction: column; gap: 14px;">
+      <input style="padding: 15px 5px; padding-right: 72px; border-radius: 10px;" type="email" id="email" placeholder="Email" required>
+      <input style="padding: 15px 5px; padding-right: 72px; border-radius: 10px;" type="password" id="password" placeholder="Password" required>
+      <button style=" padding: 10px 20px;" type="submit">Login</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 BookMyShow</p>
+  </footer>
+
+  <script src="app.js">
+    function onsubmit(){
+
+    }
+  </script>
+</body>
+</html>

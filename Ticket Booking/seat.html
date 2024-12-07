@@ -1,0 +1,119 @@
+<html>
+<head>
+  <title>Seat Selection - BookMyShow</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js"></script>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <h1>BookMyShow</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="Payment.html">Demo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Seat Selection Section -->
+  <section id="seat-selection">
+    <h2>Select Seats for <span id="movie-name"></span></h2>
+    <p>Price per ticket: ₹<span id="ticket-price"></span></p>
+    
+    <!-- Seat Layout -->
+    <div id="seat-layout">
+      <h3>Select Seats</h3>
+      <!-- Dynamically create rows and seats -->
+      <div id="rows-container"></div>
+    </div>
+
+    <div>
+      <h3>Selected Seats: <span id="selected_seats">0</span></h3>
+      <div id="seats">
+        <div class="seat">1</div>
+        <div class="seat">2</div>
+        <div class="seat">3</div>
+        <div class="seat">4</div>
+        <div class="seat">5</div>
+        <div class="seat">6</div>
+        <div class="seat">7</div>
+        <div class="seat">8</div>
+        <div class="seat">9</div>
+        <div class="seat">10</div>
+        <div class="seat">11</div>
+        <div class="seat">12</div>
+        <div class="seat">13</div>
+        <div class="seat">14</div>
+        <div class="seat">15</div>
+        <div class="seat">16</div>
+        <div class="seat">17</div>
+        <div class="seat">18</div>
+        <div class="seat">19</div>
+        <div class="seat">20</div>
+        <div class="seat">21</div>
+        <div class="seat">22</div>
+        <div class="seat">23</div>
+        <div class="seat">24</div>
+        <div class="seat">25</div>
+        <!-- Add more seat divs as needed -->
+      </div>
+    </div>
+
+    <h3>Total Amount: <span id="total_amount">0</span></h3>
+    
+    <button id="confirmBooking"">Confirm Booking</button>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2024 BookMyShow</p>
+  </footer>
+<script>
+  // Retrieve movie name and ticket price from localStorage
+  const movieName = localStorage.getItem('movieName');
+  const ticketPrice = localStorage.getItem('ticketPrice');
+
+  // Display the movie name and ticket price on the seat selection page
+  document.getElementById('movie-name').textContent = movieName;
+  document.getElementById('ticket-price').textContent = ticketPrice;
+
+  // Seat selection logic remains the same
+  const seatElements = document.querySelectorAll('.seat');
+  const selectedSeatsDisplay = document.getElementById('selected_seats');
+  const totalAmountDisplay = document.getElementById('total_amount');
+  let selected_seats = 0;
+  let total_amount = 0;
+
+  seatElements.forEach(seat => {
+    seat.addEventListener('click', () => {
+      seat.classList.toggle('selected');
+      updateSelectedSeats();
+      updateTotalAmount();
+    });
+  });
+
+  function updateSelectedSeats() {
+    selected_seats = document.querySelectorAll('.seat.selected').length;
+    selectedSeatsDisplay.textContent = selected_seats;
+  }
+
+  function updateTotalAmount() {
+    total_amount = selected_seats * ticketPrice;  // Use the ticket price from localStorage
+    totalAmountDisplay.textContent = `₹${total_amount}`;
+  }
+
+  // Handle booking confirmation
+  document.getElementById('confirmBooking').addEventListener('click', () => {
+    window.location.href = `payment1.html?totalAmount=${total_amount}`;
+  });
+</script>
+
+ </body>
+</html>
